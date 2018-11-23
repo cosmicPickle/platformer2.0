@@ -462,8 +462,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 40
-  field of view: 46
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -488,7 +488,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.66, y: -1.1926177, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -941,8 +941,9 @@ GameObject:
   - component: {fileID: 1308834862}
   - component: {fileID: 1308834868}
   - component: {fileID: 1308834867}
-  - component: {fileID: 1308834866}
   - component: {fileID: 1308834869}
+  - component: {fileID: 1308834866}
+  - component: {fileID: 1308834870}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1060,13 +1061,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1308834861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -57143145, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Script: {fileID: -1999370065, guid: dcd2196c4e9166f499793f2007fcda35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
-    - {fileID: 11400000, guid: 91cbbb54e55333442b71bacda0e789a8, type: 2}
+    - {fileID: 11400000, guid: b84889db775efdf448b91f74883c94e2, type: 2}
 --- !u!114 &1308834867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1122,7 @@ MonoBehaviour:
   faceDirection: 1
   maxSlopeAngle: 65
   movementDirection: 0
+  maxNumberAerialJumps: 1
   maxJumpForce: 10
   minJumpForce: 3
   wallSlideSpeedMax: 1
@@ -1128,6 +1130,22 @@ MonoBehaviour:
   wallJumpClimb: {x: 20, y: 16}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: {x: 15, y: 14}
+  dashForce: 0
+--- !u!114 &1308834870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1308834861}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -57143145, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 91cbbb54e55333442b71bacda0e789a8, type: 2}
 --- !u!1 &1421577729
 GameObject:
   m_ObjectHideFlags: 0

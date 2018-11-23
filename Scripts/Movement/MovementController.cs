@@ -95,14 +95,8 @@ public class MovementController : RaycastController
         return newVelocity;
     } 
 
-    public Vector2 GetJumpVelocity()
+    public Vector2 GetWallJumpVelocity()
     {
-        if(collisions.below)
-        {
-            aerialJumps = 0;
-            return Vector2.up * maxJumpForce;
-        }
-
         float wallDirection = collisions.left ? -1 : 1;
         if(collisions.left || collisions.right && !collisions.below)
         {
@@ -125,9 +119,21 @@ public class MovementController : RaycastController
             return force;
         }
 
-        if(!collisions.left && !collisions.right && !collisions.below)
+        
+
+        return Vector2.zero;
+    }
+
+    public Vector2 GetJumpVelocity()
+    {
+        if (collisions.below)
         {
-            if(aerialJumps < maxNumberAerialJumps)
+            return Vector2.up * maxJumpForce;
+        }
+
+        if (!collisions.left && !collisions.right && !collisions.below)
+        {
+            if (aerialJumps < maxNumberAerialJumps)
             {
                 aerialJumps++;
                 return Vector2.up * maxJumpForce;
@@ -158,6 +164,7 @@ public class MovementController : RaycastController
             {
                 collisions.left = directionX < 0;
                 collisions.right = directionX > 0;
+                aerialJumps = 0;
             }
         }
     }
@@ -186,6 +193,7 @@ public class MovementController : RaycastController
                     if (normalAngle >= 0 && normalAngle < maxSlopeAngle)
                     {
                         collisions.below = true;
+                        aerialJumps = 0;
                     }
                 }
             }
