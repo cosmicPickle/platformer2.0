@@ -26,12 +26,18 @@ public class MovementController : RaycastController
     private float timeToWallUnstick;
 
     [Header("Wall jump settings")]
+    public Vector2 wallLeap;
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
-    public Vector2 wallLeap;
+    public Vector2 wallFall;
+    
 
     [Header("Dash Settings")]
     public float dashForce;
+    public float dashDuration;
+    public float dashCooldown = .2f;
+    [HideInInspector]
+    public float lastDash;
     
     public CollisionInfo collisions;
 
@@ -61,19 +67,13 @@ public class MovementController : RaycastController
         }
     }
 
-    public Vector2 HandleWallSliding(Vector2 velocity, float directionX)
+    public Vector2 HandleWallSliding(float directionX)
     {
         float wallDirX = (collisions.left) ? -1 : 1;
-        Vector2 newVelocity = velocity;
+        Vector2 newVelocity = new Vector2(0, -wallSlideSpeedMax);
 
-        if ((collisions.left || collisions.right) && !collisions.below && velocity.y <= 0)
+        if ((collisions.left || collisions.right) && !collisions.below)
         {
-            newVelocity.x = 0;
-            if (velocity.y < -wallSlideSpeedMax)
-            {
-                newVelocity.y = -wallSlideSpeedMax;
-            }
-
             if (timeToWallUnstick > 0)
             {
                 if (directionX != wallDirX && directionX != 0)
@@ -87,8 +87,8 @@ public class MovementController : RaycastController
             }
             else
             {
-                newVelocity.x = velocity.x;
                 timeToWallUnstick = wallStickTme;
+                return new Vector2(-wallDirX * wallFall.x, wallFall.y);
             }
         }
 
